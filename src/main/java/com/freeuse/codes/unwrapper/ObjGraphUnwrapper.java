@@ -29,6 +29,8 @@ public class ObjGraphUnwrapper {
 
 	private Map<String, Object> flatValues = new HashMap<>();
 	
+	private String currentProfile;
+	
 	private Object objToUnwrap;
 	
 	public static ObjGraphUnwrapper of(Object objToUnwrap) {
@@ -57,7 +59,16 @@ public class ObjGraphUnwrapper {
 				} else if (field.isAnnotationPresent(UnwrappedProperty.class)) {
 					if(fieldValue != null || !ignoreNullValue) {
 						UnwrappedProperty jsonProperty = field.getAnnotation(UnwrappedProperty.class);
-						flatValues.put(jsonProperty.value(), fieldValue);
+						UnwrappedProfile[] profiles = jsonProperty.profiles();
+						if(profiles.length == 0) {
+							flatValues.put(jsonProperty.value(), fieldValue);
+						} else {
+							for(UnwrappedProfile profile : profiles) {
+								if(profile.profile().equals(currentProfile)) {
+									flatValues.put(profile.value(), fieldValue);
+								}
+							}
+						}
 					}
 				}
 			}
@@ -88,6 +99,15 @@ public class ObjGraphUnwrapper {
 	public ObjGraphUnwrapper ignoreNullValue(boolean ignore) {
 		this.ignoreNullValue = ignore;
 		return this;
+	}
+	
+	public ObjGraphUnwrapper setProfile(String profile) {
+		this.currentProfile = profile;
+		return this;
+	}
+	
+	public String getProfile(String profile) {
+		return this.currentProfile;
 	}
 
 }

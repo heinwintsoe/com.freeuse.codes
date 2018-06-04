@@ -10,6 +10,7 @@ import com.freeuse.codes.unwrapper.graph.Address;
 import com.freeuse.codes.unwrapper.graph.ContactInfo;
 import com.freeuse.codes.unwrapper.graph.Name;
 import com.freeuse.codes.unwrapper.graph.Person;
+import com.freeuse.codes.unwrapper.graph.ProfileType;
 
 /**
  * 
@@ -56,9 +57,16 @@ public class ObjGraphUnwrapperTest {
 		person.setGender("Male");
 		person.setContactInfo(contactInfo);
 
-		// Example 1.
-		Map<String, Object> mappedValues = ObjGraphUnwrapper.of(person).unwrap();
-		System.out.println("\n### Printing Returned Map -");
+		// Example 1. Testing with Employee profile
+		Map<String, Object> mappedValues = ObjGraphUnwrapper.of(person).setProfile(ProfileType.EMPLOYEE).unwrap();
+		System.out.println("\n### Printing Employee Profile Map -");
+		mappedValues.entrySet().forEach(entry -> {
+			System.out.println(entry.getKey() + " = " + entry.getValue());
+		});
+		
+		// Example 1. Testing with Person profile
+		mappedValues = ObjGraphUnwrapper.of(person).setProfile(ProfileType.PERSON).unwrap();
+		System.out.println("\n### Printing Person Profile Map -");
 		mappedValues.entrySet().forEach(entry -> {
 			System.out.println(entry.getKey() + " = " + entry.getValue());
 		});

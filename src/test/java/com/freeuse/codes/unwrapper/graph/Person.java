@@ -1,6 +1,7 @@
 package com.freeuse.codes.unwrapper.graph;
 
 import com.freeuse.codes.unwrapper.UnwrappableObjGraph;
+import com.freeuse.codes.unwrapper.UnwrappedProfile;
 import com.freeuse.codes.unwrapper.UnwrappedProperty;
 
 /**
@@ -21,7 +22,10 @@ public class Person {
 
 	@UnwrappableObjGraph
 	private Name name;
-	@UnwrappedProperty("person_gender")
+	@UnwrappedProperty(profiles = {
+		@UnwrappedProfile(profile=ProfileType.PERSON, value="person_gender"),
+		@UnwrappedProfile(profile=ProfileType.EMPLOYEE, value="employee_gender")
+		})
 	private String gender;
 	@UnwrappableObjGraph
 	private ContactInfo contactInfo;

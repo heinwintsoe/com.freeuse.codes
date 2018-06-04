@@ -6,8 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to define desired key name in the flattened map for a annotated property when it is
- * unwrapped into the flattened map.
+ * 
  *
  * @author Hein
  * @since 1.0
@@ -16,13 +15,13 @@ import java.lang.annotation.Target;
  * Revision History:
  * Version  Date            Author          Changes
  * ------------------------------------------------------------------------------------------------------------------------
- * 1.0      1 Jun 2018         Hein            Initial Coding
+ * 1.0      4 Jun 2018         Hein            Initial Coding
  *
  * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface UnwrappedProperty {
+public @interface UnwrappedProfile {
+	public String profile() default "";
 	public String value() default "";
-	public UnwrappedProfile[] profiles() default {};
 }
