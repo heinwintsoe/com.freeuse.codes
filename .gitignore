@@ -1,0 +1,45 @@
+# Maven folders
+target
+
+# maven files
+**/*.lst
+
+# Dimensions folders
+.dm
+
+# Generated files
+*.class
+**/orbtrc*
+**/*.ear
+
+# RAD settings
+**/.settings
+**/.apt_generated
+**/.checkstyle
+**/.factorypath
+**/.compatibility
+**/.project
+**/.classpath
+
+# Diagrams from old RAD
+**/*.dnx
+
+# VIM swap files
+*.swp
+
+# IntelliJ IDEA files
+*.iml
+.idea
+
+# Gradle
+**/build
+.gradle/
+
+# Software change
+# - these are binary files and they are tracked in Dimensions
+# - we don't need to track them on git side
+documents/software_change
+documents/Releases
+
+# Release files - these files should stay in Dimensions side only
+Software Release
